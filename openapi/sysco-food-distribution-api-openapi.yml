@@ -1,0 +1,99 @@
+openapi: 3.1.0
+info:
+  title: Sysco Food Distribution API
+  description: >-
+    The Sysco Food Distribution API provides programmatic access to Sysco's
+    food distribution platform for product ordering, catalog browsing,
+    delivery tracking, and supply chain management. Available through the
+    Sysco API Central developer portal, the API enables restaurants,
+    food service operators, and partners to integrate with Sysco's
+    distribution operations.
+  version: '1.0'
+servers:
+  - url: https://api.sysco.com
+tags:
+  - name: Products
+    description: Browse and search the Sysco product catalog.
+  - name: Orders
+    description: Create and manage food distribution orders.
+  - name: Deliveries
+    description: Track delivery status and scheduling.
+paths:
+  /products:
+    get:
+      operationId: listProducts
+      summary: List products
+      description: >-
+        Retrieves a list of products from the Sysco food distribution
+        catalog with filtering by category, brand, dietary attributes,
+        and availability.
+      tags:
+        - Products
+      parameters:
+        - name: category
+          in: query
+          description: Filter by product category.
+          schema:
+            type: string
+        - name: keyword
+          in: query
+          description: Search by keyword.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+  /orders:
+    get:
+      operationId: listOrders
+      summary: List orders
+      description: >-
+        Retrieves a list of orders placed with Sysco, including order
+        status, items, and delivery scheduling information.
+      tags:
+        - Orders
+      responses:
+        '200':
+          description: Success
+    post:
+      operationId: createOrder
+      summary: Create an order
+      description: >-
+        Creates a new food distribution order with specified products,
+        quantities, and delivery preferences.
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                deliveryDate:
+                  type: string
+                  format: date
+      responses:
+        '201':
+          description: Order created successfully
+  /deliveries:
+    get:
+      operationId: listDeliveries
+      summary: List deliveries
+      description: >-
+        Retrieves a list of scheduled and completed deliveries with
+        tracking information and estimated arrival times.
+      tags:
+        - Deliveries
+      responses:
+        '200':
+          description: Success
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
