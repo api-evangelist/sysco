@@ -12,12 +12,12 @@ info:
 servers:
   - url: https://api.sysco.com
 tags:
-  - name: Products
-    description: Browse and search the Sysco product catalog.
-  - name: Orders
-    description: Create and manage food distribution orders.
   - name: Deliveries
     description: Track delivery status and scheduling.
+  - name: Orders
+    description: Create and manage food distribution orders.
+  - name: Products
+    description: Browse and search the Sysco product catalog.
 paths:
   /products:
     get:

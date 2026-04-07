@@ -1,16 +1,14 @@
 aid: sysco
-url: 
-  https://raw.githubusercontent.com/api-evangelist/sysco/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/sysco/refs/heads/main/apis.yml
 apis:
   - aid: sysco:food-distribution-api
     name: Sysco Food Distribution API
     tags:
       - Food Distribution
-      - Supply Chain
       - Ordering
       - Restaurant
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Supply Chain
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.sysco.com
     humanURL: https://apicentral.sysco.com/
     properties:
