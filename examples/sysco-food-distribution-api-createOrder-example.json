@@ -1,0 +1,50 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/orders",
+    "headers": {
+      "Authorization": "Bearer {ACCESS_TOKEN}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "productId": "2394872",
+          "quantity": 5,
+          "unitOfMeasure": "CS"
+        },
+        {
+          "productId": "7812341",
+          "quantity": 10,
+          "unitOfMeasure": "CS"
+        }
+      ],
+      "deliveryDate": "2026-05-07",
+      "specialInstructions": "Please deliver to rear entrance"
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "orderId": "ORD-20260503-884712",
+      "status": "confirmed",
+      "deliveryDate": "2026-05-07",
+      "totalAmount": 847.35,
+      "items": [
+        {
+          "productId": "2394872",
+          "quantity": 5,
+          "unitOfMeasure": "CS",
+          "price": 124.50
+        },
+        {
+          "productId": "7812341",
+          "quantity": 10,
+          "unitOfMeasure": "CS",
+          "price": 47.99
+        }
+      ],
+      "createdAt": "2026-05-03T16:45:00Z"
+    }
+  }
+}

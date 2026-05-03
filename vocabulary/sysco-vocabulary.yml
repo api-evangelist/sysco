@@ -1,0 +1,93 @@
+vocabulary:
+  name: Sysco Food Distribution API Vocabulary
+  description: >-
+    Vocabulary for Sysco's food distribution platform APIs, covering product catalog,
+    ordering, delivery, pricing, and supply chain operations for foodservice operators.
+  version: '1.0'
+  created: '2026-05-03'
+  terms:
+    - term: SUPC
+      definition: >-
+        Sysco Universal Product Code — the unique identifier assigned by Sysco
+        to each product in its distribution catalog.
+      tags:
+        - Product
+        - Identification
+        - Catalog
+
+    - term: Order Guide
+      definition: >-
+        A customer-specific list of regularly ordered products from Sysco,
+        used to streamline repeat ordering for foodservice operators.
+      tags:
+        - Ordering
+        - Customer
+        - Catalog
+
+    - term: Food Service Operator
+      definition: >-
+        A Sysco customer such as a restaurant, school, hospital, or hotel that
+        purchases food products through the Sysco distribution network.
+      tags:
+        - Customer
+        - Food Service
+        - Distribution
+
+    - term: Case
+      definition: >-
+        The standard unit of measure (CS) for most Sysco products, representing
+        a carton or box containing multiple units of a food product.
+      tags:
+        - Ordering
+        - Units
+        - Product
+
+    - term: Contract Price
+      definition: >-
+        The negotiated price for a product specific to a Sysco customer account,
+        which may differ from the published list price.
+      tags:
+        - Pricing
+        - Contract
+        - Customer
+
+    - term: GTIN
+      definition: >-
+        Global Trade Item Number — an internationally recognized barcode identifier
+        for tracking products across the supply chain.
+      tags:
+        - Product
+        - Identification
+        - Supply Chain
+
+    - term: Route
+      definition: >-
+        A Sysco delivery route servicing a geographic area, determining delivery
+        schedule availability and estimated arrival windows for customers.
+      tags:
+        - Delivery
+        - Logistics
+        - Distribution
+
+    - term: eSysco
+      definition: >-
+        Sysco's customer-facing online ordering platform where food service operators
+        can browse catalogs, manage order guides, and place orders.
+      tags:
+        - Ordering Platform
+        - E-Commerce
+        - Customer Portal
+
+  dimensions:
+    operational:
+      - Product Catalog Browsing
+      - Order Placement
+      - Delivery Tracking
+      - Pricing Retrieval
+      - Account Management
+    capability:
+      - Restaurant Technology Integration
+      - ERP System Integration
+      - Supply Chain Automation
+      - Foodservice Portal Development
+      - Inventory Management Integration

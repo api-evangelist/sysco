@@ -1,0 +1,119 @@
+extends: spectral:oas
+rules:
+  # Require operationId
+  operation-operationId:
+    description: All operations must have an operationId.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+
+  # Require summary
+  operation-summary:
+    description: All operations must have a summary.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: truthy
+
+  # Enforce Title Case on summaries
+  operation-summary-title-case:
+    description: Operation summaries must use Title Case.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 ]*$"
+
+  # Require tags on all operations
+  operation-tags:
+    description: All operations must have at least one tag.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  # Require description on operations
+  operation-description:
+    description: All operations should have a description.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: description
+      function: truthy
+
+  # Products must include SUPC field
+  product-supc-field:
+    description: Product schema must include a productId (SUPC) field.
+    severity: error
+    given: "$.components.schemas.Product.properties"
+    then:
+      field: productId
+      function: truthy
+
+  # Orders must include deliveryDate
+  order-delivery-date:
+    description: Order schema must include a deliveryDate field.
+    severity: error
+    given: "$.components.schemas.Order.properties"
+    then:
+      field: deliveryDate
+      function: truthy
+
+  # Order items must have required quantity
+  order-item-quantity:
+    description: OrderItem schema must include a quantity field.
+    severity: error
+    given: "$.components.schemas.OrderItem.properties"
+    then:
+      field: quantity
+      function: truthy
+
+  # List operations must support pagination
+  list-pagination-page:
+    description: List operations should support page parameter for pagination.
+    severity: warn
+    given: "$.paths[*].get"
+    then:
+      field: parameters
+      function: truthy
+
+  # Response schemas should be referenced
+  response-schema-ref:
+    description: Response schemas should use $ref for maintainability.
+    severity: info
+    given: "$.paths[*][*].responses['200'].content['application/json'].schema"
+    then:
+      function: truthy
+
+  # POST operations must have request body
+  post-request-body:
+    description: POST operations must include a request body.
+    severity: error
+    given: "$.paths[*].post"
+    then:
+      field: requestBody
+      function: truthy
+
+  # Paths must use kebab-case
+  paths-kebab-case:
+    description: Path segments must use kebab-case (lowercase with hyphens).
+    severity: warn
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z0-9{}-]+)+$"
+
+  # Delivery tracking should include estimatedArrival
+  delivery-eta-field:
+    description: Delivery schema should include estimatedArrival for tracking.
+    severity: warn
+    given: "$.components.schemas.Delivery.properties"
+    then:
+      field: estimatedArrival
+      function: truthy

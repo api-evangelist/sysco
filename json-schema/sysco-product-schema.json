@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.sysco.com/schemas/product",
+  "title": "Product",
+  "description": "A Sysco food distribution product including catalog data, nutrition information, and availability.",
+  "type": "object",
+  "properties": {
+    "productId": {
+      "type": "string",
+      "description": "Sysco Universal Product Code (SUPC)."
+    },
+    "name": {
+      "type": "string",
+      "description": "Product display name."
+    },
+    "brand": {
+      "type": "string",
+      "description": "Product brand name."
+    },
+    "category": {
+      "type": "string",
+      "description": "Product category (e.g., Protein, Dairy, Produce)."
+    },
+    "gtin": {
+      "type": "string",
+      "description": "Global Trade Item Number barcode."
+    },
+    "packCount": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of units per case."
+    },
+    "size": {
+      "type": "string",
+      "description": "Package size description."
+    },
+    "unitOfMeasure": {
+      "type": "string",
+      "description": "Unit of measure (CS = Case, EA = Each, LB = Pound)."
+    },
+    "storageType": {
+      "type": "string",
+      "enum": ["refrigerated", "frozen", "dry"],
+      "description": "Storage temperature requirement."
+    },
+    "inStock": {
+      "type": "boolean",
+      "description": "Current stock availability status."
+    },
+    "nextReceiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Next expected restock date if out of stock."
+    },
+    "description": {
+      "type": "string",
+      "description": "Full product description."
+    }
+  },
+  "required": ["productId", "name", "brand", "category", "unitOfMeasure", "inStock"]
+}

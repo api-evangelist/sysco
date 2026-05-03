@@ -1,0 +1,18 @@
+{
+  "name": "Product",
+  "description": "Sysco food distribution product structure.",
+  "fields": [
+    { "name": "productId", "type": "string", "required": true, "description": "Sysco SUPC identifier." },
+    { "name": "name", "type": "string", "required": true },
+    { "name": "brand", "type": "string", "required": true },
+    { "name": "category", "type": "string", "required": true },
+    { "name": "gtin", "type": "string", "required": false },
+    { "name": "packCount", "type": "integer", "required": false },
+    { "name": "size", "type": "string", "required": false },
+    { "name": "unitOfMeasure", "type": "string", "required": true },
+    { "name": "storageType", "type": "enum", "required": false, "values": ["refrigerated", "frozen", "dry"] },
+    { "name": "inStock", "type": "boolean", "required": true },
+    { "name": "nextReceiveDate", "type": "date", "required": false },
+    { "name": "description", "type": "string", "required": false }
+  ]
+}

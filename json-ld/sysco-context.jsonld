@@ -1,0 +1,46 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "sysco": "https://api.sysco.com/vocab/",
+    "Product": "schema:Product",
+    "Order": "schema:Order",
+    "Delivery": "sysco:Delivery",
+    "Account": "schema:Organization",
+    "ProductPrice": "schema:Offer",
+    "productId": "sysco:supc",
+    "gtin": "schema:gtin",
+    "brand": "schema:brand",
+    "category": "schema:category",
+    "packCount": "sysco:packCount",
+    "size": "schema:size",
+    "unitOfMeasure": "sysco:unitOfMeasure",
+    "storageType": "sysco:storageType",
+    "inStock": "schema:availability",
+    "nextReceiveDate": {
+      "@id": "sysco:nextReceiveDate",
+      "@type": "schema:Date"
+    },
+    "orderId": "schema:orderNumber",
+    "deliveryDate": {
+      "@id": "sysco:deliveryDate",
+      "@type": "schema:Date"
+    },
+    "deliveryId": "sysco:deliveryId",
+    "trackingNumber": "sysco:trackingNumber",
+    "estimatedArrival": {
+      "@id": "sysco:estimatedArrival",
+      "@type": "schema:DateTime"
+    },
+    "contractPrice": "schema:price",
+    "listPrice": "schema:highPrice",
+    "currency": "schema:priceCurrency",
+    "accountId": "sysco:accountId",
+    "name": "schema:name",
+    "email": "schema:email",
+    "description": "schema:description",
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "schema:DateTime"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/products",
+    "headers": {
+      "Authorization": "Bearer {ACCESS_TOKEN}"
+    },
+    "parameters": {
+      "category": "Protein",
+      "keyword": "chicken breast",
+      "page": 1,
+      "pageSize": 20
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "items": [
+        {
+          "productId": "2394872",
+          "name": "Sysco Classic Boneless Skinless Chicken Breast",
+          "brand": "Sysco Classic",
+          "category": "Protein",
+          "gtin": "00030000310305",
+          "packCount": 1,
+          "size": "40 LB",
+          "unitOfMeasure": "CS",
+          "storageType": "frozen",
+          "inStock": true,
+          "nextReceiveDate": "2026-05-05",
+          "description": "Boneless skinless chicken breast, individually quick frozen, 40 lb case"
+        }
+      ],
+      "totalCount": 12,
+      "page": 1
+    }
+  }
+}

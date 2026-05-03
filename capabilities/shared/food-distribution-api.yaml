@@ -1,0 +1,240 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Sysco Food Distribution API"
+  description: "Food distribution platform API for product catalog, order management, delivery tracking, account management, and pricing."
+  tags:
+    - Sysco
+    - Food Distribution
+    - Supply Chain
+    - Food Service
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      SYSCO_API_TOKEN: SYSCO_API_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: sysco-food-distribution
+      baseUri: https://api.sysco.com
+      description: "Sysco food distribution REST API."
+      authentication:
+        type: bearer
+        token: "{{SYSCO_API_TOKEN}}"
+      resources:
+        - name: products
+          path: /products
+          description: "Sysco product catalog operations."
+          operations:
+            - name: list-products
+              method: GET
+              description: "Retrieves products from the Sysco catalog with filtering."
+              inputParameters:
+                - name: category
+                  in: query
+                  type: string
+                  required: false
+                - name: keyword
+                  in: query
+                  type: string
+                  required: false
+                - name: brand
+                  in: query
+                  type: string
+                  required: false
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                - name: pageSize
+                  in: query
+                  type: integer
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-product
+              method: GET
+              description: "Retrieves detailed product information including nutrition and packaging."
+              inputParameters:
+                - name: productId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: orders
+          path: /orders
+          description: "Order management operations."
+          operations:
+            - name: list-orders
+              method: GET
+              description: "Retrieves orders with status and delivery information."
+              inputParameters:
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                - name: dateFrom
+                  in: query
+                  type: string
+                  required: false
+                - name: dateTo
+                  in: query
+                  type: string
+                  required: false
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-order
+              method: POST
+              description: "Creates a new food distribution order."
+              inputParameters:
+                - name: deliveryDate
+                  in: body
+                  type: string
+                  required: true
+                - name: specialInstructions
+                  in: body
+                  type: string
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  deliveryDate: "{{tools.deliveryDate}}"
+                  specialInstructions: "{{tools.specialInstructions}}"
+            - name: get-order
+              method: GET
+              description: "Retrieves details for a specific order."
+              inputParameters:
+                - name: orderId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: cancel-order
+              method: DELETE
+              description: "Cancels a pending order."
+              inputParameters:
+                - name: orderId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: deliveries
+          path: /deliveries
+          description: "Delivery tracking operations."
+          operations:
+            - name: list-deliveries
+              method: GET
+              description: "Retrieves scheduled and completed deliveries with tracking."
+              inputParameters:
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                - name: dateFrom
+                  in: query
+                  type: string
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-delivery
+              method: GET
+              description: "Retrieves tracking details for a specific delivery."
+              inputParameters:
+                - name: deliveryId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: pricing
+          path: /pricing
+          description: "Contract pricing operations."
+          operations:
+            - name: list-pricing
+              method: GET
+              description: "Retrieves contract pricing for products."
+              inputParameters:
+                - name: productId
+                  in: query
+                  type: string
+                  required: false
+                - name: category
+                  in: query
+                  type: string
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: sysco-food-distribution-api
+      resources:
+        - path: /v1/products
+          name: products
+          operations:
+            - method: GET
+              name: list-products
+              call: "sysco-food-distribution.list-products"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: sysco-food-distribution-mcp
+      transport: http
+      tools:
+        - name: list-products
+          description: "Browse the Sysco food product catalog."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "sysco-food-distribution.list-products"
+          outputParameters:
+            - type: object
+              mapping: "$."
