@@ -1,256 +1,423 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Sysco Food Supply Chain"
-  description: >-
-    Unified food supply chain capability for Sysco food distribution operations.
-    Combines product catalog browsing, order management, delivery tracking, and
-    pricing into a cohesive workflow for restaurants, food service operators,
-    and supply chain integration partners.
+  label: Sysco Food Supply Chain
+  description: Unified food supply chain capability for Sysco food distribution operations. Combines product catalog browsing,
+    order management, delivery tracking, and pricing into a cohesive workflow for restaurants, food service operators, and
+    supply chain integration partners.
   tags:
-    - Sysco
-    - Food Distribution
-    - Supply Chain
-    - Food Service
-    - Order Management
-    - Delivery Tracking
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - Sysco
+  - Food Distribution
+  - Supply Chain
+  - Food Service
+  - Order Management
+  - Delivery Tracking
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      SYSCO_API_TOKEN: SYSCO_API_TOKEN
-
+- namespace: env
+  keys:
+    SYSCO_API_TOKEN: SYSCO_API_TOKEN
 capability:
   consumes:
-    - import: sysco-food-distribution
-      location: ./shared/food-distribution-api.yaml
-
+  - type: http
+    namespace: sysco-food-distribution
+    baseUri: https://api.sysco.com
+    description: Sysco food distribution REST API.
+    authentication:
+      type: bearer
+      token: '{{SYSCO_API_TOKEN}}'
+    resources:
+    - name: products
+      path: /products
+      description: Sysco product catalog operations.
+      operations:
+      - name: list-products
+        method: GET
+        description: Retrieves products from the Sysco catalog with filtering.
+        inputParameters:
+        - name: category
+          in: query
+          type: string
+          required: false
+        - name: keyword
+          in: query
+          type: string
+          required: false
+        - name: brand
+          in: query
+          type: string
+          required: false
+        - name: page
+          in: query
+          type: integer
+          required: false
+        - name: pageSize
+          in: query
+          type: integer
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-product
+        method: GET
+        description: Retrieves detailed product information including nutrition and packaging.
+        inputParameters:
+        - name: productId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: orders
+      path: /orders
+      description: Order management operations.
+      operations:
+      - name: list-orders
+        method: GET
+        description: Retrieves orders with status and delivery information.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          required: false
+        - name: dateFrom
+          in: query
+          type: string
+          required: false
+        - name: dateTo
+          in: query
+          type: string
+          required: false
+        - name: page
+          in: query
+          type: integer
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-order
+        method: POST
+        description: Creates a new food distribution order.
+        inputParameters:
+        - name: deliveryDate
+          in: body
+          type: string
+          required: true
+        - name: specialInstructions
+          in: body
+          type: string
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            deliveryDate: '{{tools.deliveryDate}}'
+            specialInstructions: '{{tools.specialInstructions}}'
+      - name: get-order
+        method: GET
+        description: Retrieves details for a specific order.
+        inputParameters:
+        - name: orderId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cancel-order
+        method: DELETE
+        description: Cancels a pending order.
+        inputParameters:
+        - name: orderId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: deliveries
+      path: /deliveries
+      description: Delivery tracking operations.
+      operations:
+      - name: list-deliveries
+        method: GET
+        description: Retrieves scheduled and completed deliveries with tracking.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          required: false
+        - name: dateFrom
+          in: query
+          type: string
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-delivery
+        method: GET
+        description: Retrieves tracking details for a specific delivery.
+        inputParameters:
+        - name: deliveryId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pricing
+      path: /pricing
+      description: Contract pricing operations.
+      operations:
+      - name: list-pricing
+        method: GET
+        description: Retrieves contract pricing for products.
+        inputParameters:
+        - name: productId
+          in: query
+          type: string
+          required: false
+        - name: category
+          in: query
+          type: string
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: sysco-supply-chain-api
-      description: "Unified REST API for Sysco food distribution and supply chain operations."
-      resources:
-        - path: /v1/products
-          name: products
-          description: "Food product catalog."
-          operations:
-            - method: GET
-              name: list-products
-              description: "Browse the Sysco food product catalog with category and keyword filtering."
-              call: "sysco-food-distribution.list-products"
-              with:
-                category: "rest.category"
-                keyword: "rest.keyword"
-                brand: "rest.brand"
-                page: "rest.page"
-                pageSize: "rest.pageSize"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: GET
-              name: get-product
-              description: "Get detailed product information including nutrition and availability."
-              call: "sysco-food-distribution.get-product"
-              with:
-                productId: "rest.productId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/orders
-          name: orders
-          description: "Food distribution orders."
-          operations:
-            - method: GET
-              name: list-orders
-              description: "List food distribution orders with status filtering."
-              call: "sysco-food-distribution.list-orders"
-              with:
-                status: "rest.status"
-                dateFrom: "rest.dateFrom"
-                dateTo: "rest.dateTo"
-                page: "rest.page"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-order
-              description: "Create a new food distribution order."
-              call: "sysco-food-distribution.create-order"
-              with:
-                deliveryDate: "rest.deliveryDate"
-                specialInstructions: "rest.specialInstructions"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: GET
-              name: get-order
-              description: "Get details for a specific order."
-              call: "sysco-food-distribution.get-order"
-              with:
-                orderId: "rest.orderId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/deliveries
-          name: deliveries
-          description: "Delivery tracking and scheduling."
-          operations:
-            - method: GET
-              name: list-deliveries
-              description: "List scheduled and completed deliveries with tracking information."
-              call: "sysco-food-distribution.list-deliveries"
-              with:
-                status: "rest.status"
-                dateFrom: "rest.dateFrom"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: GET
-              name: get-delivery
-              description: "Get tracking details for a specific delivery."
-              call: "sysco-food-distribution.get-delivery"
-              with:
-                deliveryId: "rest.deliveryId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/pricing
-          name: pricing
-          description: "Contract pricing."
-          operations:
-            - method: GET
-              name: list-pricing
-              description: "Retrieve contract pricing for food products."
-              call: "sysco-food-distribution.list-pricing"
-              with:
-                productId: "rest.productId"
-                category: "rest.category"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: sysco-supply-chain-mcp
-      transport: http
-      description: "MCP server for AI-assisted food supply chain management using Sysco APIs."
-      tools:
-        - name: list-products
-          description: "Browse the Sysco food product catalog by category, keyword, or brand."
-          hints:
-            readOnly: true
-            destructive: false
-            idempotent: true
-          call: "sysco-food-distribution.list-products"
-          with:
-            category: "tools.category"
-            keyword: "tools.keyword"
-            brand: "tools.brand"
-            page: "tools.page"
-            pageSize: "tools.pageSize"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-product
-          description: "Get detailed information about a Sysco food product by product ID."
-          hints:
-            readOnly: true
-            destructive: false
-            idempotent: true
-          call: "sysco-food-distribution.get-product"
-          with:
-            productId: "tools.productId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-orders
-          description: "List food distribution orders with optional status and date filtering."
-          hints:
-            readOnly: true
-            destructive: false
-            idempotent: true
-          call: "sysco-food-distribution.list-orders"
-          with:
-            status: "tools.status"
-            dateFrom: "tools.dateFrom"
-            dateTo: "tools.dateTo"
-            page: "tools.page"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-order
-          description: "Place a new Sysco food distribution order with products and delivery date."
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: false
-          call: "sysco-food-distribution.create-order"
-          with:
-            deliveryDate: "tools.deliveryDate"
-            specialInstructions: "tools.specialInstructions"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-order
-          description: "Get the status and details of a specific Sysco order."
-          hints:
-            readOnly: true
-            destructive: false
-            idempotent: true
-          call: "sysco-food-distribution.get-order"
-          with:
-            orderId: "tools.orderId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-deliveries
-          description: "List delivery schedules and tracking information for Sysco orders."
-          hints:
-            readOnly: true
-            destructive: false
-            idempotent: true
-          call: "sysco-food-distribution.list-deliveries"
-          with:
-            status: "tools.status"
-            dateFrom: "tools.dateFrom"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-delivery
-          description: "Get tracking details and estimated arrival for a specific Sysco delivery."
-          hints:
-            readOnly: true
-            destructive: false
-            idempotent: true
-          call: "sysco-food-distribution.get-delivery"
-          with:
-            deliveryId: "tools.deliveryId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-pricing
-          description: "Retrieve contract pricing for Sysco food products."
-          hints:
-            readOnly: true
-            destructive: false
-            idempotent: true
-          call: "sysco-food-distribution.list-pricing"
-          with:
-            productId: "tools.productId"
-            category: "tools.category"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: sysco-supply-chain-api
+    description: Unified REST API for Sysco food distribution and supply chain operations.
+    resources:
+    - path: /v1/products
+      name: products
+      description: Food product catalog.
+      operations:
+      - method: GET
+        name: list-products
+        description: Browse the Sysco food product catalog with category and keyword filtering.
+        call: sysco-food-distribution.list-products
+        with:
+          category: rest.category
+          keyword: rest.keyword
+          brand: rest.brand
+          page: rest.page
+          pageSize: rest.pageSize
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get-product
+        description: Get detailed product information including nutrition and availability.
+        call: sysco-food-distribution.get-product
+        with:
+          productId: rest.productId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/orders
+      name: orders
+      description: Food distribution orders.
+      operations:
+      - method: GET
+        name: list-orders
+        description: List food distribution orders with status filtering.
+        call: sysco-food-distribution.list-orders
+        with:
+          status: rest.status
+          dateFrom: rest.dateFrom
+          dateTo: rest.dateTo
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-order
+        description: Create a new food distribution order.
+        call: sysco-food-distribution.create-order
+        with:
+          deliveryDate: rest.deliveryDate
+          specialInstructions: rest.specialInstructions
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get-order
+        description: Get details for a specific order.
+        call: sysco-food-distribution.get-order
+        with:
+          orderId: rest.orderId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/deliveries
+      name: deliveries
+      description: Delivery tracking and scheduling.
+      operations:
+      - method: GET
+        name: list-deliveries
+        description: List scheduled and completed deliveries with tracking information.
+        call: sysco-food-distribution.list-deliveries
+        with:
+          status: rest.status
+          dateFrom: rest.dateFrom
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get-delivery
+        description: Get tracking details for a specific delivery.
+        call: sysco-food-distribution.get-delivery
+        with:
+          deliveryId: rest.deliveryId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pricing
+      name: pricing
+      description: Contract pricing.
+      operations:
+      - method: GET
+        name: list-pricing
+        description: Retrieve contract pricing for food products.
+        call: sysco-food-distribution.list-pricing
+        with:
+          productId: rest.productId
+          category: rest.category
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: sysco-supply-chain-mcp
+    transport: http
+    description: MCP server for AI-assisted food supply chain management using Sysco APIs.
+    tools:
+    - name: list-products
+      description: Browse the Sysco food product catalog by category, keyword, or brand.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sysco-food-distribution.list-products
+      with:
+        category: tools.category
+        keyword: tools.keyword
+        brand: tools.brand
+        page: tools.page
+        pageSize: tools.pageSize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-product
+      description: Get detailed information about a Sysco food product by product ID.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sysco-food-distribution.get-product
+      with:
+        productId: tools.productId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-orders
+      description: List food distribution orders with optional status and date filtering.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sysco-food-distribution.list-orders
+      with:
+        status: tools.status
+        dateFrom: tools.dateFrom
+        dateTo: tools.dateTo
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-order
+      description: Place a new Sysco food distribution order with products and delivery date.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sysco-food-distribution.create-order
+      with:
+        deliveryDate: tools.deliveryDate
+        specialInstructions: tools.specialInstructions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-order
+      description: Get the status and details of a specific Sysco order.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sysco-food-distribution.get-order
+      with:
+        orderId: tools.orderId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-deliveries
+      description: List delivery schedules and tracking information for Sysco orders.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sysco-food-distribution.list-deliveries
+      with:
+        status: tools.status
+        dateFrom: tools.dateFrom
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-delivery
+      description: Get tracking details and estimated arrival for a specific Sysco delivery.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sysco-food-distribution.get-delivery
+      with:
+        deliveryId: tools.deliveryId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-pricing
+      description: Retrieve contract pricing for Sysco food products.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sysco-food-distribution.list-pricing
+      with:
+        productId: tools.productId
+        category: tools.category
+      outputParameters:
+      - type: object
+        mapping: $.
