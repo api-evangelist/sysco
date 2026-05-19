@@ -1,0 +1,83 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sysco Food Distribution API — Pricing
+  description: 'Sysco Food Distribution API — Pricing. 1 operations. Lead operation: List Pricing. Self-contained Naftiko
+    capability covering one Sysco business surface.'
+  tags:
+  - Sysco
+  - Pricing
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYSCO_API_KEY: SYSCO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: food-distribution-pricing
+    baseUri: https://api.sysco.com
+    description: Sysco Food Distribution API — Pricing business capability. Self-contained, no shared references.
+    resources:
+    - name: pricing
+      path: /pricing
+      operations:
+      - name: listpricing
+        method: GET
+        description: List Pricing
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: productId
+          in: query
+          type: string
+        - name: category
+          in: query
+          type: string
+    authentication:
+      type: bearer
+      token: '{{env.SYSCO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: food-distribution-pricing-rest
+    port: 8080
+    description: REST adapter for Sysco Food Distribution API — Pricing. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/pricing
+      name: pricing
+      description: REST surface for pricing.
+      operations:
+      - method: GET
+        name: listpricing
+        description: List Pricing
+        call: food-distribution-pricing.listpricing
+        with:
+          productId: rest.productId
+          category: rest.category
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: food-distribution-pricing-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sysco Food Distribution API — Pricing. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-pricing
+      description: List Pricing
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: food-distribution-pricing.listpricing
+      with:
+        productId: tools.productId
+        category: tools.category
+      outputParameters:
+      - type: object
+        mapping: $.

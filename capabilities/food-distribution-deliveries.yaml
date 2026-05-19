@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sysco Food Distribution API — Deliveries
+  description: 'Sysco Food Distribution API — Deliveries. 2 operations. Lead operation: List Deliveries. Self-contained Naftiko
+    capability covering one Sysco business surface.'
+  tags:
+  - Sysco
+  - Deliveries
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYSCO_API_KEY: SYSCO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: food-distribution-deliveries
+    baseUri: https://api.sysco.com
+    description: Sysco Food Distribution API — Deliveries business capability. Self-contained, no shared references.
+    resources:
+    - name: deliveries
+      path: /deliveries
+      operations:
+      - name: listdeliveries
+        method: GET
+        description: List Deliveries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+        - name: dateFrom
+          in: query
+          type: string
+    - name: deliveries-deliveryId
+      path: /deliveries/{deliveryId}
+      operations:
+      - name: getdelivery
+        method: GET
+        description: Get Delivery
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: deliveryId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SYSCO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: food-distribution-deliveries-rest
+    port: 8080
+    description: REST adapter for Sysco Food Distribution API — Deliveries. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/deliveries
+      name: deliveries
+      description: REST surface for deliveries.
+      operations:
+      - method: GET
+        name: listdeliveries
+        description: List Deliveries
+        call: food-distribution-deliveries.listdeliveries
+        with:
+          status: rest.status
+          dateFrom: rest.dateFrom
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/deliveries/{deliveryid}
+      name: deliveries-deliveryid
+      description: REST surface for deliveries-deliveryId.
+      operations:
+      - method: GET
+        name: getdelivery
+        description: Get Delivery
+        call: food-distribution-deliveries.getdelivery
+        with:
+          deliveryId: rest.deliveryId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: food-distribution-deliveries-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sysco Food Distribution API — Deliveries. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-deliveries
+      description: List Deliveries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: food-distribution-deliveries.listdeliveries
+      with:
+        status: tools.status
+        dateFrom: tools.dateFrom
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-delivery
+      description: Get Delivery
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: food-distribution-deliveries.getdelivery
+      with:
+        deliveryId: tools.deliveryId
+      outputParameters:
+      - type: object
+        mapping: $.
