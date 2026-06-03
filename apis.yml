@@ -1,12 +1,14 @@
 aid: sysco
 name: Sysco
 description: Sysco is the global leader in selling, marketing, and distributing food products to restaurants, healthcare and
-  educational facilities, lodging establishments, and other foodservice customers. Sysco's APIC Developer Portal provides
-  REST APIs for product catalog browsing, order management, delivery tracking, account management, and pricing integration,
-  enabling partners and customers to automate their food distribution workflows.
+  educational facilities, lodging establishments, and other foodservice customers. Sysco operates the Sysco Shop ecommerce
+  platform (US, Canada, Bahamas) backed by an Apollo GraphQL supergraph composed of domain subgraphs for ordering, product,
+  pricing, delivery, and accounts. Programmatic access is partner/customer-gated through the login-only APIC Developer Portal
+  and through traditional EDI (X12) trading-partner integration; Sysco does not publish a self-serve public developer API,
+  OpenAPI specification, or open GitHub presence.
 url: https://raw.githubusercontent.com/api-evangelist/sysco/refs/heads/main/apis.yml
 created: '2026-05-03'
-modified: '2026-05-19'
+modified: '2026-06-03'
 tags:
 - Food Distribution
 - Food Service
@@ -16,12 +18,12 @@ tags:
 apis:
 - aid: sysco:food-distribution-api
   name: Sysco Food Distribution API
-  description: The Sysco Food Distribution API provides programmatic access to Sysco's food distribution platform for product
-    catalog browsing, order management, delivery tracking, account management, and pricing. Available through the Sysco APIC
-    Developer Portal, the APIs enable partners, restaurants, and food service operators to integrate with Sysco's ordering
-    systems, browse product catalogs with over 30 data fields, track deliveries, and manage their food supply chain operations.
+  description: Sysco's food distribution capabilities (product catalog browsing, order management, delivery tracking, account
+    management, and pricing) are exposed through an Apollo GraphQL supergraph powering the Sysco Shop ecommerce platform, plus
+    EDI (X12) integration for trading partners. Access is gated behind customer/partner onboarding via the login-only APIC
+    Developer Portal; Sysco publishes no public, self-serve OpenAPI specification or open API reference. The OpenAPI artifact
+    below is a non-authoritative, illustrative model of the documented capability domains, not a contract published by Sysco.
   humanURL: https://apic-devportal.sysco.com/
-  baseURL: https://api.sysco.com
   tags:
   - Food Distribution
   - Ordering
@@ -32,18 +34,13 @@ apis:
   properties:
   - type: Documentation
     url: https://apic-devportal.sysco.com/
+  - type: DeveloperPortal
+    url: https://apic-devportal.sysco.com/
+  - type: Login
+    url: https://apic-devportal.sysco.com/
   - type: OpenAPI
+    title: Illustrative (Non-Authoritative) OpenAPI
     url: openapi/sysco-food-distribution-api-openapi.yml
-  - type: NaftikoCapability
-    url: capabilities/food-distribution-accounts.yaml
-  - type: NaftikoCapability
-    url: capabilities/food-distribution-deliveries.yaml
-  - type: NaftikoCapability
-    url: capabilities/food-distribution-orders.yaml
-  - type: NaftikoCapability
-    url: capabilities/food-distribution-pricing.yaml
-  - type: NaftikoCapability
-    url: capabilities/food-distribution-products.yaml
 common:
 - type: LinkedIn
   url: https://www.linkedin.com/company/sysco
@@ -60,14 +57,16 @@ common:
 - type: Vocabulary
   url: vocabulary/sysco-vocabulary.yml
 features:
+- Sysco Shop Ecommerce Platform (US, Canada, Bahamas)
+- Apollo GraphQL Supergraph with Eight Domain Subgraphs
 - Product Catalog with 30+ Data Fields
 - Real-Time Stock Status
 - Order Management
 - Delivery Tracking
 - Contract Pricing
 - Account Management
-- GraphQL API (Apollo)
-- Staging and Production Environments
+- EDI (X12) Trading-Partner Integration
+- Partner/Customer-Gated APIC Developer Portal
 useCases:
 - Food Service Ordering Automation
 - Product Catalog Integration
@@ -77,8 +76,26 @@ useCases:
 - Restaurant Management System Integration
 integrations:
 - type: ApolloGraphQL
-  description: Sysco uses Apollo's graph-based API orchestration with domain subgraphs
+  description: Sysco runs an Apollo GraphQL supergraph with eight domain subgraphs (ordering, product, pricing, delivery,
+    accounts) layered across orchestration, core services, and enterprise tiers to power Sysco Shop.
+  url: https://www.apollographql.com/customers/sysco
+- type: EDI
+  description: Sysco exchanges X12 EDI documents (e.g. 810 Invoice, 816 Organizational Relationships, 820 Payment Order/Remittance
+    Advice) with trading partners under Sysco's published EDI specifications.
+- type: Stedi
+  description: Third-party EDI network offering pre-built Sysco X12 trading-partner integration.
+  url: https://www.stedi.com/edi/network/sysco
+- type: Cleo
+  description: Third-party EDI integration provider for Sysco compliance.
+  url: https://www.cleo.com/trading-partner-network/sysco
+- type: TrueCommerce
+  description: Third-party Sysco EDI trading-partner integration.
+  url: https://www.truecommerce.com/trading-partner/sysco/
+- type: Orderful
+  description: API-first EDI network with pre-codified Sysco trading-partner integration.
+  url: https://www.orderful.com/network/sysco
 - type: Portable
+  description: Sysco-to-PostgreSQL data connector.
   url: https://portable.io/connectors/sysco/postgresql
 solutions:
 - Restaurant Technology Integration

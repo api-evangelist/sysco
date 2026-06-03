@@ -69,14 +69,34 @@ vocabulary:
         - Logistics
         - Distribution
 
-    - term: eSysco
+    - term: Sysco Shop
       definition: >-
-        Sysco's customer-facing online ordering platform where food service operators
-        can browse catalogs, manage order guides, and place orders.
+        Sysco's customer-facing ecommerce ordering platform (web and mobile, serving the
+        US, Canada, and the Bahamas) where foodservice operators browse catalogs, manage
+        order guides, and place orders. Backed by an Apollo GraphQL supergraph.
       tags:
         - Ordering Platform
         - E-Commerce
         - Customer Portal
+
+    - term: Subgraph
+      definition: >-
+        A domain-specific GraphQL service within Sysco's Apollo supergraph. Sysco runs eight
+        subgraphs spanning ordering, product, pricing, delivery, and accounts.
+      tags:
+        - GraphQL
+        - Architecture
+        - Integration
+
+    - term: EDI (X12)
+      definition: >-
+        Electronic Data Interchange using ANSI X12 transaction sets (e.g. 810 Invoice, 816
+        Organizational Relationships, 820 Payment Order/Remittance Advice) for B2B
+        trading-partner integration with Sysco's procurement and billing systems.
+      tags:
+        - Integration
+        - Supply Chain
+        - Trading Partner
 
   dimensions:
     operational:
