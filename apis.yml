@@ -6,11 +6,11 @@ created: '2026-05-03'
 modified: '2026-06-03'
 tags:
   - Fortune 100
-- Food Distribution
-- Food Service
-- Supply Chain
-- Fortune 100
-- Wholesale
+  - Food Distribution
+  - Food Service
+  - Supply Chain
+  - Fortune 100
+  - Wholesale
 apis:
 - aid: sysco:food-distribution-api
   name: Sysco Food Distribution API
