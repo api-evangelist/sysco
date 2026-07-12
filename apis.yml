@@ -36,6 +36,12 @@ apis:
   - url: graphql/sysco-graphql.md
     type: GraphQL
 common:
+- type: VulnerabilityDisclosure
+  url: security/sysco-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/sysco-domain-security.yml
+- type: Authentication
+  url: authentication/sysco-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/sysco
 - type: Website
