@@ -36,6 +36,8 @@ apis:
   - url: graphql/sysco-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/sysco-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/sysco-vulnerability-disclosure.yml
 - type: DomainSecurity
