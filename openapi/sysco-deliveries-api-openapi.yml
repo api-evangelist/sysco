@@ -1,0 +1,102 @@
+openapi: 3.1.0
+info:
+  title: Sysco Food Distribution Accounts Deliveries API
+  description: The Sysco Food Distribution API provides programmatic access to Sysco's food distribution platform for product ordering, catalog browsing, delivery tracking, account management, and supply chain integration. Available through the Sysco API Central developer portal, the API enables restaurants, food service operators, and partners to integrate with Sysco's distribution operations and ordering systems.
+  version: '1.0'
+  contact:
+    url: https://apic-devportal.sysco.com/
+servers:
+- url: https://api.sysco.com
+  description: Production
+- url: https://api-stg.sysco.com
+  description: Staging
+security:
+- bearerAuth: []
+tags:
+- name: Deliveries
+  description: Track delivery status and scheduling.
+paths:
+  /deliveries:
+    get:
+      operationId: listDeliveries
+      summary: List Deliveries
+      description: Retrieves a list of scheduled and completed deliveries with tracking information and estimated arrival times.
+      tags:
+      - Deliveries
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - scheduled
+          - in_transit
+          - delivered
+      - name: dateFrom
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Delivery list returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryList'
+  /deliveries/{deliveryId}:
+    get:
+      operationId: getDelivery
+      summary: Get Delivery
+      description: Retrieves tracking and status details for a specific delivery.
+      tags:
+      - Deliveries
+      parameters:
+      - name: deliveryId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delivery details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Delivery'
+components:
+  schemas:
+    DeliveryList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Delivery'
+    Delivery:
+      type: object
+      properties:
+        deliveryId:
+          type: string
+        orderId:
+          type: string
+        status:
+          type: string
+          enum:
+          - scheduled
+          - in_transit
+          - delivered
+        scheduledDate:
+          type: string
+          format: date
+        estimatedArrival:
+          type: string
+          format: date-time
+        trackingNumber:
+          type: string
+        driverName:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

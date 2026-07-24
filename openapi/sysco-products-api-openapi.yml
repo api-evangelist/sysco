@@ -1,0 +1,132 @@
+openapi: 3.1.0
+info:
+  title: Sysco Food Distribution Accounts Products API
+  description: The Sysco Food Distribution API provides programmatic access to Sysco's food distribution platform for product ordering, catalog browsing, delivery tracking, account management, and supply chain integration. Available through the Sysco API Central developer portal, the API enables restaurants, food service operators, and partners to integrate with Sysco's distribution operations and ordering systems.
+  version: '1.0'
+  contact:
+    url: https://apic-devportal.sysco.com/
+servers:
+- url: https://api.sysco.com
+  description: Production
+- url: https://api-stg.sysco.com
+  description: Staging
+security:
+- bearerAuth: []
+tags:
+- name: Products
+  description: Browse and search the Sysco product catalog.
+paths:
+  /products:
+    get:
+      operationId: listProducts
+      summary: List Products
+      description: Retrieves a list of products from the Sysco food distribution catalog with filtering by category, brand, dietary attributes, and availability. Supports over 30 fields of product data including real-time stock status and next receive dates.
+      tags:
+      - Products
+      parameters:
+      - name: category
+        in: query
+        description: Filter by product category.
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        description: Search by keyword.
+        schema:
+          type: string
+      - name: brand
+        in: query
+        description: Filter by brand name.
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Product list returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductList'
+        '401':
+          description: Unauthorized
+  /products/{productId}:
+    get:
+      operationId: getProduct
+      summary: Get Product
+      description: Retrieves detailed information about a specific product including nutrition facts, allergens, packaging details, and pricing.
+      tags:
+      - Products
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The Sysco product identifier (SUPC).
+      responses:
+        '200':
+          description: Product details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+components:
+  schemas:
+    ProductList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        totalCount:
+          type: integer
+        page:
+          type: integer
+    Product:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: Sysco Universal Product Code (SUPC).
+        name:
+          type: string
+        brand:
+          type: string
+        category:
+          type: string
+        gtin:
+          type: string
+          description: Global Trade Item Number barcode.
+        packCount:
+          type: integer
+        size:
+          type: string
+        unitOfMeasure:
+          type: string
+        storageType:
+          type: string
+          enum:
+          - refrigerated
+          - frozen
+          - dry
+        inStock:
+          type: boolean
+        nextReceiveDate:
+          type: string
+          format: date
+        description:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

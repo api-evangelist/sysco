@@ -1,0 +1,186 @@
+openapi: 3.1.0
+info:
+  title: Sysco Food Distribution Accounts Orders API
+  description: The Sysco Food Distribution API provides programmatic access to Sysco's food distribution platform for product ordering, catalog browsing, delivery tracking, account management, and supply chain integration. Available through the Sysco API Central developer portal, the API enables restaurants, food service operators, and partners to integrate with Sysco's distribution operations and ordering systems.
+  version: '1.0'
+  contact:
+    url: https://apic-devportal.sysco.com/
+servers:
+- url: https://api.sysco.com
+  description: Production
+- url: https://api-stg.sysco.com
+  description: Staging
+security:
+- bearerAuth: []
+tags:
+- name: Orders
+  description: Create and manage food distribution orders.
+paths:
+  /orders:
+    get:
+      operationId: listOrders
+      summary: List Orders
+      description: Retrieves a list of orders placed with Sysco, including order status, items, and delivery scheduling information. Supports up to 14 months of order history.
+      tags:
+      - Orders
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - pending
+          - confirmed
+          - shipped
+          - delivered
+          - cancelled
+      - name: dateFrom
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: dateTo
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: page
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Order list returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+    post:
+      operationId: createOrder
+      summary: Create Order
+      description: Creates a new food distribution order with specified products, quantities, delivery date, and preferences.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+      responses:
+        '201':
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Bad request
+  /orders/{orderId}:
+    get:
+      operationId: getOrder
+      summary: Get Order
+      description: Retrieves details for a specific order including items and status.
+      tags:
+      - Orders
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Order details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Order not found
+    delete:
+      operationId: cancelOrder
+      summary: Cancel Order
+      description: Cancels a pending order that has not yet been shipped.
+      tags:
+      - Orders
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Order cancelled
+        '404':
+          description: Order not found
+components:
+  schemas:
+    OrderItem:
+      type: object
+      required:
+      - productId
+      - quantity
+      properties:
+        productId:
+          type: string
+        quantity:
+          type: integer
+        unitOfMeasure:
+          type: string
+        price:
+          type: number
+    OrderList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+        totalCount:
+          type: integer
+    OrderRequest:
+      type: object
+      required:
+      - items
+      - deliveryDate
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        deliveryDate:
+          type: string
+          format: date
+        specialInstructions:
+          type: string
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - confirmed
+          - shipped
+          - delivered
+          - cancelled
+        deliveryDate:
+          type: string
+          format: date
+        totalAmount:
+          type: number
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        createdAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

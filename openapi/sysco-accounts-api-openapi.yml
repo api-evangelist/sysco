@@ -1,0 +1,88 @@
+openapi: 3.1.0
+info:
+  title: Sysco Food Distribution Accounts API
+  description: The Sysco Food Distribution API provides programmatic access to Sysco's food distribution platform for product ordering, catalog browsing, delivery tracking, account management, and supply chain integration. Available through the Sysco API Central developer portal, the API enables restaurants, food service operators, and partners to integrate with Sysco's distribution operations and ordering systems.
+  version: '1.0'
+  contact:
+    url: https://apic-devportal.sysco.com/
+servers:
+- url: https://api.sysco.com
+  description: Production
+- url: https://api-stg.sysco.com
+  description: Staging
+security:
+- bearerAuth: []
+tags:
+- name: Accounts
+  description: Manage customer account information.
+paths:
+  /accounts:
+    get:
+      operationId: listAccounts
+      summary: List Accounts
+      description: Retrieves customer account information.
+      tags:
+      - Accounts
+      responses:
+        '200':
+          description: Account list returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+  /accounts/{accountId}:
+    get:
+      operationId: getAccount
+      summary: Get Account
+      description: Retrieves details for a specific customer account.
+      tags:
+      - Accounts
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        accountId:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - restaurant
+          - healthcare
+          - education
+          - hospitality
+        address:
+          type: object
+          properties:
+            street:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            zipCode:
+              type: string
+        contactEmail:
+          type: string
+          format: email
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
