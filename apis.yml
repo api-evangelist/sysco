@@ -1,4 +1,18 @@
 aid: sysco
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sysco.png
 name: Sysco
 description: Sysco is the global leader in selling, marketing, and distributing food products to restaurants, healthcare and educational facilities, lodging establishments, and other foodservice customers. Sysco operates the Sysco Shop ecommerce platform (US, Canada, Bahamas) backed by an Apollo GraphQL supergraph composed of domain subgraphs for ordering, product, pricing, delivery, and accounts. Programmatic access is partner/customer-gated through the login-only APIC Developer Portal and through traditional EDI (X12) trading-partner integration; Sysco does not publish a self-serve public developer API, OpenAPI specification, or open GitHub presence.
 url: https://raw.githubusercontent.com/api-evangelist/sysco/refs/heads/main/apis.yml
@@ -12,29 +26,91 @@ tags:
   - Fortune 100
   - Wholesale
 apis:
-- aid: sysco:food-distribution-api
-  name: Sysco Food Distribution API
-  description: Sysco's food distribution capabilities (product catalog browsing, order management, delivery tracking, account management, and pricing) are exposed through an Apollo GraphQL supergraph powering the Sysco Shop ecommerce platform, plus EDI (X12) integration for trading partners. Access is gated behind customer/partner onboarding via the login-only APIC Developer Portal; Sysco publishes no public, self-serve OpenAPI specification or open API reference. The OpenAPI artifact below is a non-authoritative, illustrative model of the documented capability domains, not a contract published by Sysco.
+- aid: sysco:sysco-accounts-api
+  name: Sysco Accounts API
+  description: Manage customer account information.
   humanURL: https://apic-devportal.sysco.com/
   tags:
-  - Food Distribution
-  - Ordering
-  - Restaurant
-  - Supply Chain
-  - Product Catalog
-  - Delivery Tracking
+  - Accounts
   properties:
+  - type: OpenAPI
+    url: openapi/sysco-accounts-api-openapi.yml
   - type: Documentation
     url: https://apic-devportal.sysco.com/
   - type: DeveloperPortal
     url: https://apic-devportal.sysco.com/
   - type: Login
     url: https://apic-devportal.sysco.com/
+  - type: GraphQL
+    url: graphql/sysco-graphql.md
+- aid: sysco:sysco-deliveries-api
+  name: Sysco Deliveries API
+  description: Track delivery status and scheduling.
+  humanURL: https://apic-devportal.sysco.com/
+  tags:
+  - Deliveries
+  properties:
   - type: OpenAPI
-    title: Illustrative (Non-Authoritative) OpenAPI
-    url: openapi/sysco-food-distribution-api-openapi.yml
-  - url: graphql/sysco-graphql.md
-    type: GraphQL
+    url: openapi/sysco-deliveries-api-openapi.yml
+  - type: Documentation
+    url: https://apic-devportal.sysco.com/
+  - type: DeveloperPortal
+    url: https://apic-devportal.sysco.com/
+  - type: Login
+    url: https://apic-devportal.sysco.com/
+  - type: GraphQL
+    url: graphql/sysco-graphql.md
+- aid: sysco:sysco-orders-api
+  name: Sysco Orders API
+  description: Create and manage food distribution orders.
+  humanURL: https://apic-devportal.sysco.com/
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/sysco-orders-api-openapi.yml
+  - type: Documentation
+    url: https://apic-devportal.sysco.com/
+  - type: DeveloperPortal
+    url: https://apic-devportal.sysco.com/
+  - type: Login
+    url: https://apic-devportal.sysco.com/
+  - type: GraphQL
+    url: graphql/sysco-graphql.md
+- aid: sysco:sysco-pricing-api
+  name: Sysco Pricing API
+  description: Retrieve product pricing and contract pricing.
+  humanURL: https://apic-devportal.sysco.com/
+  tags:
+  - Pricing
+  properties:
+  - type: OpenAPI
+    url: openapi/sysco-pricing-api-openapi.yml
+  - type: Documentation
+    url: https://apic-devportal.sysco.com/
+  - type: DeveloperPortal
+    url: https://apic-devportal.sysco.com/
+  - type: Login
+    url: https://apic-devportal.sysco.com/
+  - type: GraphQL
+    url: graphql/sysco-graphql.md
+- aid: sysco:sysco-products-api
+  name: Sysco Products API
+  description: Browse and search the Sysco product catalog.
+  humanURL: https://apic-devportal.sysco.com/
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/sysco-products-api-openapi.yml
+  - type: Documentation
+    url: https://apic-devportal.sysco.com/
+  - type: DeveloperPortal
+    url: https://apic-devportal.sysco.com/
+  - type: Login
+    url: https://apic-devportal.sysco.com/
+  - type: GraphQL
+    url: graphql/sysco-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/sysco-agentic-access.yml
