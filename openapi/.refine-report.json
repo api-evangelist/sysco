@@ -1,0 +1,22 @@
+{
+  "provider": "sysco",
+  "sources": [
+    "sysco-accounts-api-openapi.yml",
+    "sysco-deliveries-api-openapi.yml",
+    "sysco-orders-api-openapi.yml",
+    "sysco-pricing-api-openapi.yml",
+    "sysco-products-api-openapi.yml"
+  ],
+  "outputs": [
+    "sysco-accounts-api-openapi.yml",
+    "sysco-deliveries-api-openapi.yml",
+    "sysco-orders-api-openapi.yml",
+    "sysco-pricing-api-openapi.yml",
+    "sysco-products-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
