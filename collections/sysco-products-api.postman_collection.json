@@ -1,0 +1,373 @@
+{
+  "item": [
+    {
+      "id": "0ac6cb85-5d4e-4c2f-b778-9604ea9453ff",
+      "name": "Products",
+      "description": {
+        "content": "Browse and search the Sysco product catalog.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "411b39a8-a01e-48ae-a36c-64a376e1e1b8",
+          "name": "List Products",
+          "request": {
+            "name": "List Products",
+            "description": {
+              "content": "Retrieves a list of products from the Sysco food distribution catalog with filtering by category, brand, dietary attributes, and availability. Supports over 30 fields of product data including real-time stock status and next receive dates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Filter by product category."
+                },
+                {
+                  "disabled": false,
+                  "key": "keyword",
+                  "value": "<string>",
+                  "description": "Search by keyword."
+                },
+                {
+                  "disabled": false,
+                  "key": "brand",
+                  "value": "<string>",
+                  "description": "Filter by brand name."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "99695f2c-648a-4fe6-83b3-1c80dd68e1ff",
+              "name": "Product list returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"productId\": \"string\",\n      \"name\": \"string\",\n      \"brand\": \"string\",\n      \"category\": \"string\",\n      \"gtin\": \"string\",\n      \"packCount\": 5616,\n      \"size\": \"string\",\n      \"unitOfMeasure\": \"string\",\n      \"storageType\": \"dry\",\n      \"inStock\": false,\n      \"nextReceiveDate\": \"1964-05-31\",\n      \"description\": \"string\"\n    },\n    {\n      \"productId\": \"string\",\n      \"name\": \"string\",\n      \"brand\": \"string\",\n      \"category\": \"string\",\n      \"gtin\": \"string\",\n      \"packCount\": 3734,\n      \"size\": \"string\",\n      \"unitOfMeasure\": \"string\",\n      \"storageType\": \"dry\",\n      \"inStock\": false,\n      \"nextReceiveDate\": \"2002-12-21\",\n      \"description\": \"string\"\n    }\n  ],\n  \"totalCount\": 1529,\n  \"page\": 6277\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "164bb58b-53d5-4878-9340-69f2a41615fb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a12c6d48-e228-4d2c-bb9f-205a673e66a8",
+          "name": "Get Product",
+          "request": {
+            "name": "Get Product",
+            "description": {
+              "content": "Retrieves detailed information about a specific product including nutrition facts, allergens, packaging details, and pricing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":productId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productId",
+                  "description": "(Required) The Sysco product identifier (SUPC)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb3f4ece-c08a-45fe-b9ae-0a9f9e1fb3a0",
+              "name": "Product details returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) The Sysco product identifier (SUPC)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"productId\": \"string\",\n  \"name\": \"string\",\n  \"brand\": \"string\",\n  \"category\": \"string\",\n  \"gtin\": \"string\",\n  \"packCount\": 6070,\n  \"size\": \"string\",\n  \"unitOfMeasure\": \"string\",\n  \"storageType\": \"refrigerated\",\n  \"inStock\": false,\n  \"nextReceiveDate\": \"1995-11-04\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d8e8507-acef-4de6-b14b-76a14aa3817b",
+              "name": "Product not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) The Sysco product identifier (SUPC)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sysco.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6ce27966-799e-4362-81ce-ba797f9ee2aa",
+    "name": "Sysco Food Distribution Accounts Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sysco Food Distribution API provides programmatic access to Sysco's food distribution platform for product ordering, catalog browsing, delivery tracking, account management, and supply chain integration. Available through the Sysco API Central developer portal, the API enables restaurants, food service operators, and partners to integrate with Sysco's distribution operations and ordering systems.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sysco Food Distribution Accounts Orders API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sysco.com/orders",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dateFrom",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dateTo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of orders placed with Sysco, including order status, items, and delivery scheduling information. Supports up to 14 months of order history."
+        },
+        {
+          "info": {
+            "name": "Create Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sysco.com/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new food distribution order with specified products, quantities, delivery date, and preferences."
+        },
+        {
+          "info": {
+            "name": "Get Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sysco.com/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves details for a specific order including items and status."
+        },
+        {
+          "info": {
+            "name": "Cancel Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sysco.com/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels a pending order that has not yet been shipped."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

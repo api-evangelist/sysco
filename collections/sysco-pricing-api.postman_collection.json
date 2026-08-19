@@ -1,0 +1,139 @@
+{
+  "item": [
+    {
+      "id": "7da94c09-7512-4fee-a0c3-b47b663e8d71",
+      "name": "Pricing",
+      "description": {
+        "content": "Retrieve product pricing and contract pricing.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "be122ef4-763b-4af1-b9f1-aab9c4a61800",
+          "name": "List Pricing",
+          "request": {
+            "name": "List Pricing",
+            "description": {
+              "content": "Retrieves contract pricing for products available to the customer account, including promotional pricing and volume discounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "productId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "299d9a62-e30f-4b94-a2c1-e23d151cc255",
+              "name": "Pricing information returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"productId\": \"string\",\n      \"contractPrice\": 5019.236777880498,\n      \"listPrice\": 5356.324443766347,\n      \"currency\": \"USD\",\n      \"effectiveDate\": \"1997-03-04\",\n      \"expirationDate\": \"2024-07-22\"\n    },\n    {\n      \"productId\": \"string\",\n      \"contractPrice\": 4278.794077426825,\n      \"listPrice\": 8939.737822229767,\n      \"currency\": \"USD\",\n      \"effectiveDate\": \"1995-10-11\",\n      \"expirationDate\": \"1987-05-25\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sysco.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c54eda2e-4aa5-43ac-8994-513d8246de84",
+    "name": "Sysco Food Distribution Accounts Pricing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sysco Food Distribution API provides programmatic access to Sysco's food distribution platform for product ordering, catalog browsing, delivery tracking, account management, and supply chain integration. Available through the Sysco API Central developer portal, the API enables restaurants, food service operators, and partners to integrate with Sysco's distribution operations and ordering systems.",
+      "type": "text/plain"
+    }
+  }
+}

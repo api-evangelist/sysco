@@ -1,0 +1,215 @@
+{
+  "item": [
+    {
+      "id": "d5fad588-3576-47a0-9343-77e1b8b91767",
+      "name": "Accounts",
+      "description": {
+        "content": "Manage customer account information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "249234e8-0122-4f3c-9ce9-1b823a947d69",
+          "name": "List Accounts",
+          "request": {
+            "name": "List Accounts",
+            "description": {
+              "content": "Retrieves customer account information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f8328df-a77b-4630-ae09-d769df268a11",
+              "name": "Account list returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"accountId\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"healthcare\",\n    \"address\": {\n      \"street\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zipCode\": \"string\"\n    },\n    \"contactEmail\": \"5nHJSvPEE9uYj7u@hGaZFlXGcsEBcXIJEb.caot\"\n  },\n  {\n    \"accountId\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"education\",\n    \"address\": {\n      \"street\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zipCode\": \"string\"\n    },\n    \"contactEmail\": \"AU0@DKttkgxSowdYPk.wged\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6583452d-eca4-47ba-91b9-38c681e258dc",
+          "name": "Get Account",
+          "request": {
+            "name": "Get Account",
+            "description": {
+              "content": "Retrieves details for a specific customer account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":accountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35f3ba18-36e3-488a-bcee-2dedfa977ceb",
+              "name": "Account details returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountId\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"restaurant\",\n  \"address\": {\n    \"street\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zipCode\": \"string\"\n  },\n  \"contactEmail\": \"wm62rz@yEIb.ur\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sysco.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "821c8e35-90f0-4798-be7b-8adb14eae269",
+    "name": "Sysco Food Distribution Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sysco Food Distribution API provides programmatic access to Sysco's food distribution platform for product ordering, catalog browsing, delivery tracking, account management, and supply chain integration. Available through the Sysco API Central developer portal, the API enables restaurants, food service operators, and partners to integrate with Sysco's distribution operations and ordering systems.",
+      "type": "text/plain"
+    }
+  }
+}

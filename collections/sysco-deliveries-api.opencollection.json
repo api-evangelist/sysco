@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sysco Food Distribution Accounts Deliveries API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deliveries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Deliveries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sysco.com/deliveries",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dateFrom",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of scheduled and completed deliveries with tracking information and estimated arrival times."
+        },
+        {
+          "info": {
+            "name": "Get Delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sysco.com/deliveries/:deliveryId",
+            "params": [
+              {
+                "name": "deliveryId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves tracking and status details for a specific delivery."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sysco Food Distribution Accounts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sysco.com/accounts"
+          },
+          "docs": "Retrieves customer account information."
+        },
+        {
+          "info": {
+            "name": "Get Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sysco.com/accounts/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves details for a specific customer account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

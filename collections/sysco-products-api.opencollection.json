@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sysco Food Distribution Accounts Products API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sysco.com/products",
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filter by product category."
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Search by keyword."
+              },
+              {
+                "name": "brand",
+                "value": "",
+                "type": "query",
+                "description": "Filter by brand name."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of products from the Sysco food distribution catalog with filtering by category, brand, dietary attributes, and availability. Supports over 30 fields of product data including real-time stock status and next receive dates."
+        },
+        {
+          "info": {
+            "name": "Get Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sysco.com/products/:productId",
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path",
+                "description": "The Sysco product identifier (SUPC)."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific product including nutrition facts, allergens, packaging details, and pricing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

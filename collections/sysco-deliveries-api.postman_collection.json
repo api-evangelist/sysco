@@ -1,0 +1,235 @@
+{
+  "item": [
+    {
+      "id": "ac186f6a-d069-44ba-9d46-5fd051656d49",
+      "name": "Deliveries",
+      "description": {
+        "content": "Track delivery status and scheduling.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4124cfcd-154b-4cca-84b4-2b59d50a1d56",
+          "name": "List Deliveries",
+          "request": {
+            "name": "List Deliveries",
+            "description": {
+              "content": "Retrieves a list of scheduled and completed deliveries with tracking information and estimated arrival times.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "deliveries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateFrom",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3952aaed-58e2-470e-b9db-91bbaa97f336",
+              "name": "Delivery list returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deliveries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFrom",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"deliveryId\": \"string\",\n      \"orderId\": \"string\",\n      \"status\": \"scheduled\",\n      \"scheduledDate\": \"1979-08-25\",\n      \"estimatedArrival\": \"1986-04-16T18:53:10.805Z\",\n      \"trackingNumber\": \"string\",\n      \"driverName\": \"string\"\n    },\n    {\n      \"deliveryId\": \"string\",\n      \"orderId\": \"string\",\n      \"status\": \"scheduled\",\n      \"scheduledDate\": \"1976-02-09\",\n      \"estimatedArrival\": \"1953-06-02T12:00:00.874Z\",\n      \"trackingNumber\": \"string\",\n      \"driverName\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d0673e4-7b6b-4ccc-8f84-cc1b4ccd89da",
+          "name": "Get Delivery",
+          "request": {
+            "name": "Get Delivery",
+            "description": {
+              "content": "Retrieves tracking and status details for a specific delivery.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "deliveries",
+                ":deliveryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deliveryId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12e12aa0-a2eb-4032-acf0-96a8eaf89fb5",
+              "name": "Delivery details returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deliveries",
+                    ":deliveryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deliveryId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deliveryId\": \"string\",\n  \"orderId\": \"string\",\n  \"status\": \"scheduled\",\n  \"scheduledDate\": \"2016-02-09\",\n  \"estimatedArrival\": \"2018-08-18T00:05:31.581Z\",\n  \"trackingNumber\": \"string\",\n  \"driverName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sysco.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "26ea772d-400a-4ed9-9e8c-22eb905a0725",
+    "name": "Sysco Food Distribution Accounts Deliveries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sysco Food Distribution API provides programmatic access to Sysco's food distribution platform for product ordering, catalog browsing, delivery tracking, account management, and supply chain integration. Available through the Sysco API Central developer portal, the API enables restaurants, food service operators, and partners to integrate with Sysco's distribution operations and ordering systems.",
+      "type": "text/plain"
+    }
+  }
+}
