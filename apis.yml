@@ -24,6 +24,12 @@ tags:
   - Food Distribution
   - Food Service
   - Supply Chain
+  - Wholesale
+tags_raw:
+  - Fortune 100
+  - Food Distribution
+  - Food Service
+  - Supply Chain
   - Fortune 100
   - Wholesale
 apis:
@@ -32,6 +38,8 @@ apis:
   description: Manage customer account information.
   humanURL: https://apic-devportal.sysco.com/
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -66,6 +74,8 @@ apis:
   description: Create and manage food distribution orders.
   humanURL: https://apic-devportal.sysco.com/
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -100,6 +110,8 @@ apis:
   description: Browse and search the Sysco product catalog.
   humanURL: https://apic-devportal.sysco.com/
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
