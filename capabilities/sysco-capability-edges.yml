@@ -1,0 +1,44 @@
+slug: sysco
+provider: Sysco
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Agriculture & Food Production
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Deliveries
+  spec_file: sysco-deliveries-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.75
+  evidence: GET /deliveries  listDeliveries  List Deliveries ... "delivery tracking, account management,
+    and supply chain integration"
+  reason: Delivery tracking for a food distribution network is transport/logistics execution within the
+    supply chain rather than any agriculture-specific production capability.
+- tag: Orders
+  spec_file: sysco-orders-api-openapi.yml
+  capability_id: BC-520.40
+  capability_id_l1: BC-520
+  capability_name: Order Fulfilment Management
+  confidence: 0.7
+  evidence: 'POST /orders  createOrder  Create Order; DELETE /orders/{orderId}  cancelOrder  Cancel Order;
+    schemas: OrderItem, Order, OrderRequest'
+  reason: Customer order capture, retrieval and cancellation on a distributor's ordering platform is order
+    fulfilment/orchestration; could arguably be sales order entry, hence moderate confidence.
+- tag: Pricing
+  spec_file: sysco-pricing-api-openapi.yml
+  capability_id: BC-440.20
+  capability_id_l1: BC-440
+  capability_name: Price List Management
+  confidence: 0.7
+  evidence: 'GET /pricing  listPricing ... schemas: ProductPrice, PricingList'
+  reason: Exposes customer-visible product prices from the distributor's price book — price list management;
+    single read endpoint limits confidence on the sub-capability.

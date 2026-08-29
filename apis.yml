@@ -137,6 +137,9 @@ apis:
   - type: GraphQL
     url: graphql/sysco-graphql.md
 common:
+- type: CapabilityMap
+  url: capabilities/sysco-capability-edges.yml
+  name: Sysco Business Capability Map
 - type: AgenticAccess
   url: agentic-access/sysco-agentic-access.yml
 - type: VulnerabilityDisclosure
