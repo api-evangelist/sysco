@@ -1,7 +1,9 @@
 ---
 title: Sysco puts AI at the center of its sales rebound in Q1
 url: https://www.digitalcommerce360.com/2025/10/31/sysco-puts-ai-at-the-center-of-its-sales-rebound-in-q1/
-date: '2026-05-25'
+published: '2025-10-31'
+date_basis: url-derived
+harvested: '2026-05-25'
 query: '"Sysco" press release artificial intelligence'
 position: 2
 source: serpapi-google

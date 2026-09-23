@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sysco Food Distribution Accounts Products API
+  title: Sysco Food Distribution Products API
   description: The Sysco Food Distribution API provides programmatic access to Sysco's food distribution platform for product ordering, catalog browsing, delivery tracking, account management, and supply chain integration. Available through the Sysco API Central developer portal, the API enables restaurants, food service operators, and partners to integrate with Sysco's distribution operations and ordering systems.
   version: '1.0'
   contact:
@@ -81,17 +81,6 @@ paths:
           description: Product not found
 components:
   schemas:
-    ProductList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-        totalCount:
-          type: integer
-        page:
-          type: integer
     Product:
       type: object
       properties:
@@ -126,6 +115,17 @@ components:
           format: date
         description:
           type: string
+    ProductList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        totalCount:
+          type: integer
+        page:
+          type: integer
   securitySchemes:
     bearerAuth:
       type: http

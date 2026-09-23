@@ -1,11 +1,7 @@
 {
   "provider": "sysco",
   "sources": [
-    "sysco-accounts-api-openapi.yml",
-    "sysco-deliveries-api-openapi.yml",
-    "sysco-orders-api-openapi.yml",
-    "sysco-pricing-api-openapi.yml",
-    "sysco-products-api-openapi.yml"
+    "_original/sysco-food-distribution-api-openapi.yml"
   ],
   "outputs": [
     "sysco-accounts-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sysco-food-distribution-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "sysco-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sysco-deliveries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sysco-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sysco-pricing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sysco-products-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
