@@ -38,6 +38,7 @@ tags:
   - Food Service
   - Supply Chain
   - Wholesale
+  - Food and Beverage
 tags_raw:
   - Fortune 100
   - Food Distribution
@@ -45,6 +46,7 @@ tags_raw:
   - Supply Chain
   - Fortune 100
   - Wholesale
+  - Food and Beverage
 apis:
 - aid: sysco:sysco-accounts-api
   name: Sysco Accounts API
@@ -63,8 +65,6 @@ apis:
     url: https://apic-devportal.sysco.com/
   - type: Login
     url: https://apic-devportal.sysco.com/
-  - type: GraphQL
-    url: graphql/sysco-graphql.md
 - aid: sysco:sysco-deliveries-api
   name: Sysco Deliveries API
   description: Track delivery status and scheduling.
@@ -80,8 +80,6 @@ apis:
     url: https://apic-devportal.sysco.com/
   - type: Login
     url: https://apic-devportal.sysco.com/
-  - type: GraphQL
-    url: graphql/sysco-graphql.md
 - aid: sysco:sysco-orders-api
   name: Sysco Orders API
   description: Create and manage food distribution orders.
@@ -99,8 +97,6 @@ apis:
     url: https://apic-devportal.sysco.com/
   - type: Login
     url: https://apic-devportal.sysco.com/
-  - type: GraphQL
-    url: graphql/sysco-graphql.md
 - aid: sysco:sysco-pricing-api
   name: Sysco Pricing API
   description: Retrieve product pricing and contract pricing.
@@ -116,8 +112,6 @@ apis:
     url: https://apic-devportal.sysco.com/
   - type: Login
     url: https://apic-devportal.sysco.com/
-  - type: GraphQL
-    url: graphql/sysco-graphql.md
 - aid: sysco:sysco-products-api
   name: Sysco Products API
   description: Browse and search the Sysco product catalog.
@@ -135,8 +129,6 @@ apis:
     url: https://apic-devportal.sysco.com/
   - type: Login
     url: https://apic-devportal.sysco.com/
-  - type: GraphQL
-    url: graphql/sysco-graphql.md
 common:
 - type: CapabilityMap
   url: capabilities/sysco-capability-edges.yml

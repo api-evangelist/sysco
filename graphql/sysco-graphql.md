@@ -1,1 +1,0 @@
-# Sysco GraphQL API
