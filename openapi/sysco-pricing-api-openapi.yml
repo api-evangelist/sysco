@@ -41,6 +41,13 @@ paths:
                 $ref: '#/components/schemas/PricingList'
 components:
   schemas:
+    PricingList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductPrice'
     ProductPrice:
       type: object
       properties:
@@ -59,13 +66,6 @@ components:
         expirationDate:
           type: string
           format: date
-    PricingList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductPrice'
   securitySchemes:
     bearerAuth:
       type: http
