@@ -117,6 +117,29 @@ paths:
           description: Order not found
 components:
   schemas:
+    OrderList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+        totalCount:
+          type: integer
+    OrderItem:
+      type: object
+      required:
+      - productId
+      - quantity
+      properties:
+        productId:
+          type: string
+        quantity:
+          type: integer
+        unitOfMeasure:
+          type: string
+        price:
+          type: number
     OrderRequest:
       type: object
       required:
@@ -157,29 +180,6 @@ components:
         createdAt:
           type: string
           format: date-time
-    OrderList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Order'
-        totalCount:
-          type: integer
-    OrderItem:
-      type: object
-      required:
-      - productId
-      - quantity
-      properties:
-        productId:
-          type: string
-        quantity:
-          type: integer
-        unitOfMeasure:
-          type: string
-        price:
-          type: number
   securitySchemes:
     bearerAuth:
       type: http

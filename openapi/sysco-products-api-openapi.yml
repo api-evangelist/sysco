@@ -81,6 +81,17 @@ paths:
           description: Product not found
 components:
   schemas:
+    ProductList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        totalCount:
+          type: integer
+        page:
+          type: integer
     Product:
       type: object
       properties:
@@ -115,17 +126,6 @@ components:
           format: date
         description:
           type: string
-    ProductList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-        totalCount:
-          type: integer
-        page:
-          type: integer
   securitySchemes:
     bearerAuth:
       type: http
