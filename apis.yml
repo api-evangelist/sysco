@@ -31,7 +31,7 @@ name: Sysco
 description: Sysco is the global leader in selling, marketing, and distributing food products to restaurants, healthcare and educational facilities, lodging establishments, and other foodservice customers. Sysco operates the Sysco Shop ecommerce platform (US, Canada, Bahamas) backed by an Apollo GraphQL supergraph composed of domain subgraphs for ordering, product, pricing, delivery, and accounts. Programmatic access is partner/customer-gated through the login-only APIC Developer Portal and through traditional EDI (X12) trading-partner integration; Sysco does not publish a self-serve public developer API, OpenAPI specification, or open GitHub presence.
 url: https://raw.githubusercontent.com/api-evangelist/sysco/refs/heads/main/apis.yml
 created: '2026-05-03'
-modified: '2026-06-03'
+modified: '2026-10-06'
 tags:
   - Fortune 100
   - Food Distribution
@@ -130,6 +130,8 @@ apis:
   - type: Login
     url: https://apic-devportal.sysco.com/
 common:
+- url: https://www.sysco.com/blog
+  type: Blog
 - type: CapabilityMap
   url: capabilities/sysco-capability-edges.yml
   name: Sysco Business Capability Map
