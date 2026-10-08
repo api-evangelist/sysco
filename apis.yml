@@ -130,6 +130,12 @@ apis:
   - type: Login
     url: https://apic-devportal.sysco.com/
 common:
+- type: Plans
+  url: plans/sysco-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/sysco-rate-limits.yml
+- type: FinOps
+  url: finops/sysco-finops.yml
 - url: https://www.sysco.com/blog
   type: Blog
 - type: CapabilityMap
