@@ -66,13 +66,6 @@ paths:
                 $ref: '#/components/schemas/Delivery'
 components:
   schemas:
-    DeliveryList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Delivery'
     Delivery:
       type: object
       properties:
@@ -96,6 +89,13 @@ components:
           type: string
         driverName:
           type: string
+    DeliveryList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Delivery'
   securitySchemes:
     bearerAuth:
       type: http

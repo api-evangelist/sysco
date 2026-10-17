@@ -117,20 +117,6 @@ paths:
           description: Order not found
 components:
   schemas:
-    OrderItem:
-      type: object
-      required:
-      - productId
-      - quantity
-      properties:
-        productId:
-          type: string
-        quantity:
-          type: integer
-        unitOfMeasure:
-          type: string
-        price:
-          type: number
     Order:
       type: object
       properties:
@@ -180,6 +166,20 @@ components:
           format: date
         specialInstructions:
           type: string
+    OrderItem:
+      type: object
+      required:
+      - productId
+      - quantity
+      properties:
+        productId:
+          type: string
+        quantity:
+          type: integer
+        unitOfMeasure:
+          type: string
+        price:
+          type: number
   securitySchemes:
     bearerAuth:
       type: http
