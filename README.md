@@ -1,4 +1,4 @@
-# Sysco (sysco)
+# Sysco
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,53 +66,167 @@
 
 Sysco is the global leader in selling, marketing, and distributing food products to restaurants, healthcare and educational facilities, lodging establishments, and other foodservice customers. Sysco operates the Sysco Shop ecommerce platform (US, Canada, Bahamas) backed by an Apollo GraphQL supergraph composed of domain subgraphs for ordering, product, pricing, delivery, and accounts. Programmatic access is partner/customer-gated through the login-only APIC Developer Portal and through traditional EDI (X12) trading-partner integration; Sysco does not publish a self-serve public developer API, OpenAPI specification, or open GitHub presence.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/sysco/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/sysco/refs/heads/main/apis.yml)
+**Areas:** Fortune 100 · Food Distribution · Food Service · Supply Chain · Wholesale · Food and Beverage
 
-## Tags
+## Sysco on APIs.io
 
-- Food Distribution
-- Food Service
-- Supply Chain
-- Fortune 100
-- Wholesale
+Everything profiled for Sysco is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/sysco/](https://apis.io/providers/sysco/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-05-03
-- **Modified:** 2026-06-03
+- [Sysco Accounts API](https://apis.io/apis/sysco/sysco-accounts-api/) — Manage customer account information.
+- [Sysco Deliveries API](https://apis.io/apis/sysco/sysco-deliveries-api/) — Track delivery status and scheduling.
+- [Sysco Orders API](https://apis.io/apis/sysco/sysco-orders-api/) — Create and manage food distribution orders.
+- [Sysco Pricing API](https://apis.io/apis/sysco/sysco-pricing-api/) — Retrieve product pricing and contract pricing.
+- [Sysco Products API](https://apis.io/apis/sysco/sysco-products-api/) — Browse and search the Sysco product catalog.
 
-## APIs
+### Published properties
 
-### Sysco Food Distribution API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Sysco's food distribution capabilities (product catalog browsing, order management, delivery tracking, account management, and pricing) are exposed through an Apollo GraphQL supergraph powering the Sysco Shop ecommerce platform, plus EDI (X12) integration for trading partners. Access is gated behind customer/partner onboarding via the login-only APIC Developer Portal; Sysco publishes no public, self-serve OpenAPI specification or open API reference. The OpenAPI artifact below is a non-authoritative, illustrative model of the documented capability domains, not a contract published by Sysco.
+#### GraphQL (1)
 
-- **Human URL:** [https://apic-devportal.sysco.com/](https://apic-devportal.sysco.com/)
+GraphQL schemas.
 
-#### Tags
+- [Moved to /providers/sysco/](https://apis.io/graphqls/sysco/sysco-graphql/)
 
-- Food Distribution
-- Ordering
-- Restaurant
-- Supply Chain
-- Product Catalog
-- Delivery Tracking
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://apic-devportal.sysco.com/)
-- [Developer Portal](https://apic-devportal.sysco.com/)
-- [Login](https://apic-devportal.sysco.com/)
-- [OpenAPI](openapi/sysco-food-distribution-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sysco-food-distribution-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sysco-food-distribution-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Sysco Agentic Access](https://apis.io/agentic-access/sysco/sysco-agentic-access/)
 
-## Common Properties
+#### JSON Schema (1)
 
-- [LinkedIn](https://www.linkedin.com/company/sysco)
+The data models the API reads and writes.
+
+- [Product](https://apis.io/schemas/sysco/sysco-product/)
+
+#### JSON Structure (1)
+
+Data models expressed in JSON Structure.
+
+- [Sysco Product Structure](https://apis.io/json-structure/sysco/sysco-product-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Sysco Context](https://apis.io/jsonld/sysco/sysco-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Sysco Food Distribution API Vocabulary](https://apis.io/vocabularies/sysco/sysco-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Sysco Food Distribution Api Createorder Example](https://apis.io/examples/sysco/sysco-food-distribution-api-createOrder-example/)
+- [Sysco Food Distribution Api Listproducts Example](https://apis.io/examples/sysco/sysco-food-distribution-api-listProducts-example/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [Sysco Food Distribution Accounts API](https://apis.io/collections/sysco/open-sysco-accounts-api/)
+- [Sysco Food Distribution Accounts Deliveries API](https://apis.io/collections/sysco/open-sysco-deliveries-api/)
+- [Sysco Food Distribution API](https://apis.io/collections/sysco/open-sysco-food-distribution-api/)
+- [Sysco Food Distribution Accounts Orders API](https://apis.io/collections/sysco/open-sysco-orders-api/)
+- [Sysco Food Distribution Accounts Pricing API](https://apis.io/collections/sysco/open-sysco-pricing-api/)
+- [Sysco Food Distribution Accounts Products API](https://apis.io/collections/sysco/open-sysco-products-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Sysco — jsonschema rules](https://apis.io/rules/sysco/sysco-jsonschema-spectral-rules/)
+- [Sysco API Rules](https://apis.io/rules/sysco/sysco-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Sysco Authentication](https://apis.io/security/sysco/sysco-authentication/)
+- [Sysco Domain Security](https://apis.io/security/sysco/sysco-domain-security/)
+- [Sysco Vulnerability Disclosure](https://apis.io/security/sysco/sysco-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Sysco Plans Pricing](https://apis.io/plans/sysco/sysco-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Sysco Rate Limits](https://apis.io/rate-limits/sysco/sysco-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Sysco Finops](https://apis.io/finops/sysco/sysco-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.sysco.com)
-- [Developer Portal](https://apic-devportal.sysco.com/)
-- [Git Hub Org](https://github.com/SyscoCorporation)
-- [Graph Q L](https://www.apollographql.com/customers/sysco)
-- [J S O N L D Context](json-ld/sysco-context.jsonld)
-- [Vocabulary](vocabulary/sysco-vocabulary.yml)
+- [Blog](https://www.sysco.com/blog)
+
+## API Evangelist rating
+
+**Kin Score 33.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 51.8 |
+| Contract quality | 52.3 |
+| Contract governance | 27.3 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 33.3 |
+| Access clarity | 18.4 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/sysco/](https://apis.io/providers/sysco/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Sysco: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/sysco/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
